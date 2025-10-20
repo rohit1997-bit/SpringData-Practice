@@ -3,17 +3,13 @@ package com.example.demo;
 import com.example.demo.models.*;
 import com.example.demo.repository.DoctorRepository;
 import com.example.demo.repository.PatientRepository;
-import com.example.demo.repository.StudentRepository;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
+import com.example.demo.repository.StudentsRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @SpringBootApplication
 @Component
@@ -29,7 +25,7 @@ public class DemoApplication implements CommandLineRunner {
     private DoctorRepository doctorRepository;
 
     @Autowired
-    private StudentRepository studentRepository;
+    private StudentsRepository studentsRepository;
 
     public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
@@ -102,9 +98,9 @@ public class DemoApplication implements CommandLineRunner {
          studentOne.setPerson(personOne);
          studentOne.addCourse(coursesOne);
          studentOne.addCourse(coursesTwo);
-         studentRepository.save(studentOne);
+         studentsRepository.save(studentOne);
 
-        Student ss = studentRepository.findByPerson_Name(personOne.getName());
+        Student ss = studentsRepository.findByPerson_Name(personOne.getName());
         System.out.println(ss.getCourses().getFirst().getCourseName());
         System.out.println(ss.getCourses().getLast().getCourseName());
         System.out.println(coursesOne.getStudent().getFirst().getPerson().getName());
